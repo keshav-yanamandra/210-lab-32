@@ -11,6 +11,8 @@
 using namespace std;
 
 const int INITIAL_CARS = 2;
+const int PAY_CHANCE = 55;
+const int JOIN_CHANCE = 45;
 
 void displayQueue(deque<Car> &lane);
 
@@ -37,16 +39,30 @@ int main() {
 
         t++;
 
-        cout << endl;
-        cout << "Time: " << t << " Operation: Car paid: ";
-        lane.front().print();
+        int o = rand() % (PAY_CHANCE + JOIN_CHANCE);
 
-        lane.pop_front();
+
+        cout << endl;
+        cout << "Time: " << t << " Operation: ";
+
+        if (o < PAY_CHANCE) {
+            cout << "Car paid: ";
+            lane.front().print();
+            lane.pop_front();
+        }
+        else {
+            Car car;
+            lane.push_back(car);
+
+            cout << "Joined lane: ";
+            car.print();
+        }
 
         cout << "Queue:" << endl;
         displayQueue(lane);
 
     }
+
     return 0;
 }
 
