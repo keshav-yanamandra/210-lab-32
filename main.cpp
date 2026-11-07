@@ -1,5 +1,5 @@
 // Keshav Yanamandra
-// COMSC-210-5293
+// COMSC-210
 // Lab 32
 
 #include <iostream>
@@ -11,6 +11,7 @@
 using namespace std;
 
 const int INITIAL_CARS = 2;
+//chances are %s so they add up to 100
 const int PAY_CHANCE = 55;
 const int JOIN_CHANCE = 45;
 
@@ -21,6 +22,7 @@ int main() {
     srand(time(0));
     deque<Car> lane;
 
+    // loop instantiates the lane with the starting cars
     for (int i = 0; i < INITIAL_CARS; i++) {
         Car car;
         lane.push_back(car);
@@ -31,8 +33,10 @@ int main() {
     // lane.front().print();
 
     cout << "Initial queue:" << endl;
+    
     displayQueue(lane);
 
+    // named it t and not time because ctime already has a time() function 
     int t = 0;
 
     while (!lane.empty()) {
@@ -66,9 +70,10 @@ int main() {
     return 0;
 }
 
+// prints the whole lane with 4 spaces in front of each car
 void displayQueue(deque<Car> &lane) {
 
-    //handling for empty
+    // handling for empty
     if (lane.empty()) {
         cout << "    Empty" << endl;
         return;
