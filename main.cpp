@@ -31,12 +31,32 @@ int main() {
     cout << "Initial queue:" << endl;
     displayQueue(lane);
 
+    int t = 0;
 
+    while (!lane.empty()) {
 
+        t++;
+
+        cout << endl;
+        cout << "Time: " << t << " Operation: Car paid: ";
+        lane.front().print();
+
+        lane.pop_front();
+
+        cout << "Queue:" << endl;
+        displayQueue(lane);
+
+    }
     return 0;
 }
 
 void displayQueue(deque<Car> &lane) {
+
+    //handling for empty
+    if (lane.empty()) {
+        cout << "    Empty" << endl;
+        return;
+    }
 
     for (deque<Car>::iterator it = lane.begin();
          it != lane.end(); ++it) {
@@ -45,3 +65,4 @@ void displayQueue(deque<Car> &lane) {
         it->print();
     }
 }
+
