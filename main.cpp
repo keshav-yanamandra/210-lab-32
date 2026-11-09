@@ -16,6 +16,7 @@ const int INITIAL_CARS = 2;
 // const int JOIN_CHANCE = 45;
 //lanes
 const int LANES = 4;
+const int PERIODS=20;
 
 void displayQueue(deque<Car> &lane);
 
@@ -69,6 +70,36 @@ int main() {
     for (int i = 0; i < LANES; i++) {
         cout << "Lane " << i + 1 << ":" << endl;
         displayQueue(lanes[i]);
+    }
+
+    for (int t = 1; t <= PERIODS; t++) {
+
+        cout << endl;
+        cout << "Time: " << t << endl;
+
+        // all lanes first
+        for (int i = 0; i < LANES; i++) {
+
+            int op = rand() % 2;
+
+            if (op == 0 && !lanes[i].empty()) {
+                cout << "Lane: " << i + 1 << " Paid: ";
+                lanes[i].front().print();
+                lanes[i].pop_front();
+            }
+            else {
+                Car car;
+                lanes[i].push_back(car);
+
+                cout << "Lane: " << i + 1 << " Joined: ";
+                car.print();
+            }
+        }
+
+        // then print all queues
+        for (int i = 0; i < LANES; i++) {
+            displayPeriodQueue(lanes[i], i + 1);
+        }
     }
 
     // displayQueue(lane);
@@ -129,14 +160,13 @@ void displayPeriodQueue(deque<Car> &lane, int laneNum) {
 
     if (lane.empty()) {
         cout << "Lane " << laneNum << " Queue: empty" << endl;
-        
         return;
     }
 
     cout << "Lane " << laneNum << " Queue: " << endl;
 
     for (deque<Car>::iterator it = lane.begin();
-         it != lane.end(); ++it) {
+        it != lane.end(); ++it) {
 
         cout << "        ";
         it->print();
