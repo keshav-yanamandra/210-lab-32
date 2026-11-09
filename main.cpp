@@ -1,6 +1,6 @@
 // Keshav Yanamandra
 // COMSC-210
-// Lab 32
+// Lab 33
 
 #include <iostream>
 #include <deque>
@@ -14,12 +14,17 @@ const int INITIAL_CARS = 2;
 //chances are %s so they add up to 100
 const int PAY_CHANCE = 55;
 const int JOIN_CHANCE = 45;
+//lanes
+const int LANES = 4;
 
 void displayQueue(deque<Car> &lane);
 
 int main() {
 
     srand(time(0));
+
+    deque<Car> lanes[LANES];
+
     deque<Car> lane;
 
     // loop instantiates the lane with the starting cars
