@@ -81,28 +81,53 @@ int main() {
         // all lanes first
         for (int i = 0; i < LANES; i++) {
 
-            int roll = rand() % 100;
+            // empty lanes have a separate 50/50 chance
+            if (lanes[i].empty()) {
 
-            if (roll < PAY_CHANCE && !lanes[i].empty()) {
-                cout << "Lane: " << i + 1 << " Paid: ";
-                lanes[i].front().print();
-                lanes[i].pop_front();
+                int emptyRoll = rand() % 2;
+
+                if (emptyRoll == 0) {
+                    Car car;
+                    lanes[i].push_back(car);
+
+                    cout << "Lane: " << i + 1 << " Joined: ";
+                    car.print();
+                }
             }
-            else if (roll < PAY_CHANCE + JOIN_CHANCE) {
-                Car car;
-                lanes[i].push_back(car);
+            else {
 
-                cout << "Lane: " << i + 1 << " Joined: ";
-                car.print();
+                int roll = rand() % 100;
+
+                if (roll < PAY_CHANCE) {
+                    cout << "Lane: " << i + 1 << " Paid: ";
+                    lanes[i].front().print();
+                    lanes[i].pop_front();
+                }
+                else if (roll < PAY_CHANCE + JOIN_CHANCE) {
+                    Car car;
+                    lanes[i].push_back(car);
+
+                    cout << "Lane: " << i + 1 << " Joined: ";
+                    car.print();
+                }
+                else if (roll < PAY_CHANCE + JOIN_CHANCE + SWITCH_CHANCE) {
+
+                    int newLane = rand() % LANES;
+
+                    while (newLane == i) {
+                        newLane = rand() % LANES;
+                    }
+
+                    Car car = lanes[i].back();
+
+                    cout << "Lane: " << i + 1 << " Switched: ";
+                    car.print();
+
+                    lanes[i].pop_back();
+                    lanes[newLane].push_back(car);
+                }
             }
-            else if (!lanes[i].empty()) {
-                cout << "Lane: " << i + 1 << " Switched: ";
-                lanes[i].back().print();
-            }
-
-
         }
-
         // then print all queues
         for (int i = 0; i < LANES; i++) {
             displayPeriodQueue(lanes[i], i + 1);
