@@ -12,8 +12,8 @@ using namespace std;
 
 const int INITIAL_CARS = 2;
 //chances are %s so they add up to 100
-const int PAY_CHANCE = 55;
-const int JOIN_CHANCE = 45;
+// const int PAY_CHANCE = 55;
+// const int JOIN_CHANCE = 45;
 //lanes
 const int LANES = 4;
 
@@ -63,39 +63,44 @@ int main() {
     // lane.front().print();
 
     cout << "Initial queue:" << endl;
-    
-    displayQueue(lane);
 
-    // named it t and not time because ctime already has a time() function 
-    int t = 0;
-
-    while (!lane.empty()) {
-
-        t++;
-
-        int o = rand() % (PAY_CHANCE + JOIN_CHANCE);
-
-
-        cout << endl;
-        cout << "Time: " << t << " Operation: ";
-
-        if (o < PAY_CHANCE) {
-            cout << "Car paid: ";
-            lane.front().print();
-            lane.pop_front();
-        }
-        else {
-            Car car;
-            lane.push_back(car);
-
-            cout << "Joined lane: ";
-            car.print();
-        }
-
-        cout << "Queue:" << endl;
-        displayQueue(lane);
-
+    for (int i = 0; i < LANES; i++) {
+        cout << "Lane " << i + 1 << ":" << endl;
+        displayQueue(lanes[i]);
     }
+
+    // displayQueue(lane);
+
+    // // named it t and not time because ctime already has a time() function 
+    // int t = 0;
+
+    // while (!lane.empty()) {
+
+    //     t++;
+
+    //     int o = rand() % (PAY_CHANCE + JOIN_CHANCE);
+
+
+    //     cout << endl;
+    //     cout << "Time: " << t << " Operation: ";
+
+    //     if (o < PAY_CHANCE) {
+    //         cout << "Car paid: ";
+    //         lane.front().print();
+    //         lane.pop_front();
+    //     }
+    //     else {
+    //         Car car;
+    //         lane.push_back(car);
+
+    //         cout << "Joined lane: ";
+    //         car.print();
+    //     }
+
+    //     cout << "Queue:" << endl;
+    //     displayQueue(lane);
+
+    // }
 
     return 0;
 }
