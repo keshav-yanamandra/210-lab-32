@@ -25,22 +25,30 @@ int main() {
 
     deque<Car> lanes[LANES];
 
-    // test the array of deques
+    // putting 2 cars in each lane
     for (int i = 0; i < LANES; i++) {
-        Car testCar;
-        lanes[i].push_back(testCar);
-
-        cout << "Lane " << i + 1 << " size: "
-            << lanes[i].size() << endl;
-
-        cout << "Front car: ";
-        lanes[i].front().print();
-
-        cout << "Back car: ";
-        lanes[i].back().print();
-
-        lanes[i].pop_back();
+        for (int j = 0; j < INITIAL_CARS; j++) {
+            Car car;
+            lanes[i].push_back(car);
+        }
     }
+
+    // test the array of deques
+    // for (int i = 0; i < LANES; i++) {
+    //     Car testCar;
+    //     lanes[i].push_back(testCar);
+
+    //     cout << "Lane " << i + 1 << " size: "
+    //         << lanes[i].size() << endl;
+
+    //     cout << "Front car: ";
+    //     lanes[i].front().print();
+
+    //     cout << "Back car: ";
+    //     lanes[i].back().print();
+
+    //     lanes[i].pop_back();
+    // }
 
     deque<Car> lane;
 
