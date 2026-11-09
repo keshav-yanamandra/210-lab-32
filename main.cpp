@@ -12,8 +12,9 @@ using namespace std;
 
 const int INITIAL_CARS = 2;
 //chances are %s so they add up to 100
-// const int PAY_CHANCE = 55;
-// const int JOIN_CHANCE = 45;
+const int PAY_CHANCE = 46;
+const int JOIN_CHANCE = 39;
+const int SWITCH_CHANCE = 15;
 //lanes
 const int LANES = 4;
 const int PERIODS=20;
@@ -80,20 +81,26 @@ int main() {
         // all lanes first
         for (int i = 0; i < LANES; i++) {
 
-            int op = rand() % 2;
+            int roll = rand() % 100;
 
-            if (op == 0 && !lanes[i].empty()) {
+            if (roll < PAY_CHANCE && !lanes[i].empty()) {
                 cout << "Lane: " << i + 1 << " Paid: ";
                 lanes[i].front().print();
                 lanes[i].pop_front();
             }
-            else {
+            else if (roll < PAY_CHANCE + JOIN_CHANCE) {
                 Car car;
                 lanes[i].push_back(car);
 
                 cout << "Lane: " << i + 1 << " Joined: ";
                 car.print();
             }
+            else if (!lanes[i].empty()) {
+                cout << "Lane: " << i + 1 << " Switched: ";
+                lanes[i].back().print();
+            }
+
+
         }
 
         // then print all queues
