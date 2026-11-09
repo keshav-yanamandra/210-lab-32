@@ -19,6 +19,8 @@ const int LANES = 4;
 
 void displayQueue(deque<Car> &lane);
 
+void displayPeriodQueue(deque<Car> &lane, int laneNum);
+
 int main() {
 
     srand(time(0));
@@ -118,6 +120,25 @@ void displayQueue(deque<Car> &lane) {
          it != lane.end(); ++it) {
 
         cout << "    ";
+        it->print();
+    }
+}
+
+// prints a lane 
+void displayPeriodQueue(deque<Car> &lane, int laneNum) {
+
+    if (lane.empty()) {
+        cout << "Lane " << laneNum << " Queue: empty" << endl;
+        
+        return;
+    }
+
+    cout << "Lane " << laneNum << " Queue: " << endl;
+
+    for (deque<Car>::iterator it = lane.begin();
+         it != lane.end(); ++it) {
+
+        cout << "        ";
         it->print();
     }
 }
